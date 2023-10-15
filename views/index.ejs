@@ -1,0 +1,43 @@
+<%- include("./partials/header") %>
+
+
+<nav class="navbar bg-black">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold" style="color: white;" href="#">NaNotes</a>
+    </div>
+</nav>
+
+
+<div class="container mt-5 rounded">
+    <div class="container bg-secondary" style="padding: 20px;">
+        <form action="/add/post" method="POST">
+            <input type="text" name="title" class="form-control bg-primary-subtle border-primary" placeholder="Title"><br>
+            <textarea type="text" name="post" class="form-control bg-primary-subtle border-primary" placeholder="Write your post"></textarea><br>
+            <input type="text" name="author" class="form-control bg-primary-subtle border-primary" placeholder="Author">
+            <div class="d-flex justify-content-center align-items-center" style="padding: 10px;">
+                <input type="submit" value="Post" class="btn btn-md btn-primary mx-auto p-2">
+            </div>
+        </form>
+    </div>
+    <div class="scrollable-container overflow-auto">
+        <ul class="list-group my-5" style="padding-bottom: 100px;">
+            <% post.forEach(posts => { %>
+                <li class="list-group-item justify-content-between align-items-center bg-secondary" style="padding-bottom: 10px;">
+                    <div class="container bg-primary-subtle">
+                        <h1><%= posts.title %></h1>
+                        <p><%= posts.post %></p>
+                        <h5>- <%= posts.author %></h5>
+                        <p class="font-monospace"><%= posts.date %></p>
+                        <div class="d-flex justify-content-center align-items-center">
+                            <a href="/update/post/<%= posts._id %>" class="btn btn-warning btn-sm mr-2">Edit</a>
+                            <a href="/delete/post/<%= posts._id %>" class="btn btn-danger btn-sm">Delete</a>
+                        </div>
+                        <br>
+                    </div>
+                </li>
+            <% }) %>        
+        </ul>
+        <br>
+    </div>
+</div>
+<%- include("./partials/footer") %>
